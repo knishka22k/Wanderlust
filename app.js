@@ -117,6 +117,8 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render("error.ejs", { message });
 }); //middleware
 
-app.listen(8080, () => {
-    console.log("starting");
+const port = process.env.PORT || 8080;
+
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
 });
