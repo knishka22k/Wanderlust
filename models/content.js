@@ -7,27 +7,35 @@ const contentSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+
     description: {
         type: String,
         required: true,
     },
+
     image: {
         url: String,
         filename: String,
     },
+
     price: Number,
+
     location: String,
+
     country: String,
+
     review: [
         {
             type: Schema.Types.ObjectId,
             ref: "Review"
         },
     ],
+
     owner: {
         type: Schema.Types.ObjectId,
         ref: "User",
     },
+
 });
 
 contentSchema.post("findOneAndDelete", async (content) => {
@@ -37,4 +45,5 @@ contentSchema.post("findOneAndDelete", async (content) => {
 });
 
 const Content = mongoose.model("Content", contentSchema);
+
 module.exports = Content;
