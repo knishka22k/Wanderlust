@@ -114,6 +114,9 @@ const reviewsRouter = require("./routes/review.js");
 app.use("/content/:id/reviews", reviewsRouter);
 
 const userRouter = require("./routes/user.js");
+app.get("/", (req, res) => {
+    res.redirect("/content");
+});
 app.use("/", userRouter );
 
 app.all(/.*/, (req, res, next) => {
