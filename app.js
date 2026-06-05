@@ -119,6 +119,20 @@ app.get("/", (req, res) => {
 });
 app.use("/", userRouter );
 
+app.get("/seed", async (req, res) => {
+    const Content = require("./models/content.js");
+    const initdata = require("./init/data.js");
+    await Content.deleteMany({});
+    await Content.insertMany(initdata.data);
+    res.send("Database seeded successfully!");
+});
+
+app.get("/count", async (req, res) => {
+    const Content = require("./models/content.js");
+    const count = await Content.countDocuments();
+    res.send(`Total listings in DB: ${count}`);
+});
+
 app.all(/.*/, (req, res, next) => {
     next(new ExpressError(404, "Page Not Found!"));
 });
@@ -134,10 +148,3 @@ app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
 
-app.get("/seed", async (req, res) => {
-    const Content = require("./models/content.js");
-    const initdata = require("./init/data.js");
-    await Content.deleteMany({});
-    await Content.insertMany(initdata.data);
-    res.send("Database seeded successfully!");
-});
