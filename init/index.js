@@ -5,7 +5,7 @@ main()
 }) 
 .catch(err => console.log(err));  
 async function main(){  
-    await mongoose.connect(`mongodb://127.0.0.1:27017/wanderlust`);  //mongoose
+    await mongoose.connect("mongodb+srv://wanderlust_db:mango123@cluster0.pu3nir7.mongodb.net/wanderlust?retryWrites=true&w=majority");
 }  
 
 const Content = require("../models/content.js");
