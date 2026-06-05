@@ -5,7 +5,10 @@ main()
 }) 
 .catch(err => console.log(err));  
 async function main(){  
-    await mongoose.connect("mongodb+srv://wanderlust_db:mango123@cluster0.pu3nir7.mongodb.net/wanderlust?retryWrites=true&w=majority");
+    await mongoose.connect("mongodb+srv://wanderlust_db:mango123@cluster0.pu3nir7.mongodb.net/wanderlust?retryWrites=true&w=majority", {
+    tls: true,
+    tlsAllowInvalidCertificates: true,
+});
 }  
 
 const Content = require("../models/content.js");

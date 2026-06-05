@@ -133,3 +133,11 @@ const port = process.env.PORT || 8080;
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
+
+app.get("/seed", async (req, res) => {
+    const Content = require("./models/content.js");
+    const initdata = require("./init/data.js");
+    await Content.deleteMany({});
+    await Content.insertMany(initdata.data);
+    res.send("Database seeded successfully!");
+});
