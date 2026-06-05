@@ -14,8 +14,12 @@ main()
     console.log("connection successful"); 
 }) 
 .catch(err => console.log(err));  
+
 async function main(){  
-    await mongoose.connect(dbUrl);  //mongoose
+    await mongoose.connect(dbUrl, {
+        tls: true,
+        tlsAllowInvalidCertificates: true,
+    });
 }  
 
 const path = require("path"); 
@@ -41,12 +45,16 @@ const MongoStore = require('connect-mongo').default;
 
 const flash = require("connect-flash");
 
-const store =  MongoStore.create({
+const store = MongoStore.create({
     mongoUrl: dbUrl,
     crypto: { 
         secret: process.env.SECRET,
     },
     touchAfter: 24 * 3600,
+    mongoOptions: {
+        tls: true,
+        tlsAllowInvalidCertificates: true,
+    },
 });
 
 store.on("error", (err) => {
